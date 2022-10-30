@@ -12,45 +12,30 @@
      </head>
 
      <body class="bg-gray-200 relative">
-          <div class="container bg-center bg-no-repeat m-auto bg-cover w-96 overflow-hidden h-screen" style="background-image: url('images/1.jpg');">
-               <div class="timer" id="timer">aaaaaaaaaaaaaa</div>
+          <div
+               class="container bg-center bg-no-repeat m-auto bg-cover w-96 overflow-hidden h-screen"
+               style="background-image: url('images/1.jpg'); background-color:rgba(0,0,0,.1); background-blend-mode:color-burn;">
+               <div class=" timer" id="timer">aaaaaaaaaaaaaa</div>
+               <div class="total-score text-white" id="total-score">0</div>
 
                <!-- target button -->
                <div
                     style="height:9999px;"
                     id="janken-preview-area"
-                    class="flex flex-col-reverse gap-10 bg-gray-00 w-28 mx-auto absolute bottom-48 right-0 left-0 text-center">
-                    <div
-                         class="relative mx-auto"
-                         data-jankenID="0">
-                         <div class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-1"></div>
-                         <img
-                              class="rounded-full shadow-sm cursor-pointer border-4 border-sky-300 hover:border-sky-400 bg-sky-50 hover:bg-sky-100 h-20 w-20"
-                              src="./images/case-1.png"
-                              alt="">
-                    </div>
-                    <div
-                         class="relative mx-auto"
-                         data-jankenID="1">
-                         <div class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-1"></div>
-                         <img
-                              class="rounded-full shadow-sm cursor-pointer border-4 border-pink-300 hover:border-pink-400 bg-sky-50  h-20 w-20"
-                              src="./images/case-2.png"
-                              alt="">
-                    </div>
+                    class="flex flex-col-reverse gap-10 bg-gray-00 w-28 mx-auto absolute bottom-52 right-0 left-0 text-center">
                </div>
 
                <!-- janken button -->
-               <div class="absolute bottom-8 right-0 left-0 flex justify-center gap-6 mb-6">
+               <div class="absolute h-40 bottom-6 right-0 left-0 flex justify-center gap-3 mb-6">
                     <img
-                         onclick="p_select_click(0);"
-                         class="inline-block cursor-pointer border-4 border-sky-300 hover:border-sky-400 bg-sky-50 hover:bg-sky-100 h-20 w-20 rounded-full" src="./images/case-1.png" alt="">
+                         onclick="clickOfferer(0);"
+                         class="inline-block cursor-pointer border-4 border-sky-300 hover:border-sky-400 bg-sky-50 hover:bg-sky-100 h-24 w-24 rounded-full" src="./images/case-0.png" alt="">
                     <img
-                         onclick="p_select_click(1);"
-                         class="inline-block cursor-pointer border-4 border-pink-300 hover:border-pink-400 bg-pink-50 hover:bg-pink-100 h-20 w-20 rounded-full" src="./images/case-2.png" alt="">
+                         onclick="clickOfferer(1);"
+                         class="self-end inline-block cursor-pointer border-4 border-pink-300 hover:border-pink-400 bg-pink-50 hover:bg-pink-100 h-24 w-24 rounded-full" src="./images/case-1.png" alt="">
                     <img
-                         onclick="p_select_click(2);"
-                         class="inline-block cursor-pointer border-4 border-yellow-300 hover:border-yellow-400 bg-yellow-50 hover:bg-yellow-100 h-20 w-20 rounded-full" src="./images/case-3.png" alt="">
+                         onclick="clickOfferer(2);"
+                         class="inline-block cursor-pointer border-4 border-yellow-300 hover:border-yellow-400 bg-yellow-50 hover:bg-yellow-100 h-24 w-24 rounded-full" src="./images/case-2.png" alt="">
                </div>
           </div>
 
