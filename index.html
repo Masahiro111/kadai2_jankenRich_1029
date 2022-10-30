@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+     <head>
+          <meta charset="UTF-8" />
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Typing Game</title>
+          <link rel="stylesheet" href="style.css" />
+          <script src="https://cdn.tailwindcss.com"></script>
+
+     </head>
+
+     <body class="bg-gray-200 relative">
+          <div class="container bg-center bg-no-repeat m-auto bg-cover w-96 overflow-hidden h-screen" style="background-image: url('images/1.jpg');">
+               <div class="timer" id="timer">aaaaaaaaaaaaaa</div>
+               <!-- <div class="container">
+            <div class="type-display" id="typeDisplay">type</div>
+            <textarea id="typeInput" class="type-input" autofocus>type</textarea>
+        </div> -->
+
+               <!-- target button -->
+               <div class="flex bg-gray-100 w-32 h-full mx-auto absolute top-0 right-0 left-0">
+                    <img
+                         class="cursor-pointer border-4 border-sky-300 hover:border-sky-400 bg-sky-50 hover:bg-sky-100 h-20 w-20 rounded-full" src="./images/case-1.png" alt="">
+                    <img
+                         class="cursor-pointer border-4 border-pink-300 hover:border-pink-400 bg-pink-50 hover:bg-pink-100 h-20 w-20 rounded-full" src="./images/case-2.png" alt="">
+                    <img
+                         class="cursor-pointer border-4 border-yellow-300 hover:border-yellow-400 bg-yellow-50 hover:bg-yellow-100 h-20 w-20 rounded-full" src="./images/case-3.png" alt="">
+                    <img
+                         class="cursor-pointer border-4 border-sky-300 hover:border-sky-400 bg-sky-50 hover:bg-sky-100 h-20 w-20 rounded-full" src="./images/case-1.png" alt="">
+                    <img
+                         class="cursor-pointer border-4 border-pink-300 hover:border-pink-400 bg-pink-50 hover:bg-pink-100 h-20 w-20 rounded-full" src="./images/case-2.png" alt="">
+                    <img
+                         class="cursor-pointer border-4 border-yellow-300 hover:border-yellow-400 bg-yellow-50 hover:bg-yellow-100 h-20 w-20 rounded-full" src="./images/case-3.png" alt="">
+               </div>
+
+               <!-- janken button -->
+               <div class="absolute bottom-8 right-0 left-0 flex justify-center gap-6 mb-6">
+                    <img
+                         onclick="R_Click(0, 0);"
+                         class="inline-block cursor-pointer border-4 border-sky-300 hover:border-sky-400 bg-sky-50 hover:bg-sky-100 h-20 w-20 rounded-full" src="./images/case-1.png" alt="">
+                    <img
+                         onclick="R_Click(1, 0);"
+                         class="inline-block cursor-pointer border-4 border-pink-300 hover:border-pink-400 bg-pink-50 hover:bg-pink-100 h-20 w-20 rounded-full" src="./images/case-2.png" alt="">
+                    <img
+                         onclick="R_Click(2, 0);"
+                         class="inline-block cursor-pointer border-4 border-yellow-300 hover:border-yellow-400 bg-yellow-50 hover:bg-yellow-100 h-20 w-20 rounded-full" src="./images/case-3.png" alt="">
+               </div>
+          </div>
+
+
+          <script src="script.js"></script>
+     </body>
+
+</html>
