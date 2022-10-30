@@ -106,3 +106,8 @@ function TimeUp() {
 }
 
 RenderNextSentence();
+
+
+
+
+
