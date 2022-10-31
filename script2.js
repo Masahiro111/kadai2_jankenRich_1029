@@ -13,14 +13,24 @@ const LOSE_REACTION = 3;
 
 let reaction_num = 0;
 
+// じゃんけんのセット回数
+let total_janken_set = 5;
 
 // ページ読み込み後の初期化処理
 window.onload = function () {
 
-    let all_janken_preview_area = "";
+    let all_janken_preview_area = generate_janken_one_set();
+
+    document.getElementById('janken-preview-area').innerHTML = all_janken_preview_area;
+};
+
+function generate_janken_one_set() {
+    var all_janken_preview_area = "";
+
     for (i = 0; i < 8; i++) {
         var theme_color = "";
         var janken_id = Math.floor(Math.random() * 3);
+
         if (janken_id == 0) {
             theme_color = "blue";
         } else if (janken_id == 1) {
@@ -28,7 +38,8 @@ window.onload = function () {
         } else {
             theme_color = "yellow";
         }
-        let add_code = `
+
+        var add_code = `
         <div class="relative mx-auto" data-jankenID="${janken_id}">
             <div class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-1"></div>
             <img class="rounded-full shadow-sm cursor-pointer border-4 border-${theme_color}-300 bg-${theme_color}-50 h-20 w-20" src="./images/case-${janken_id}.png" alt="">
@@ -36,8 +47,8 @@ window.onload = function () {
         `;
         all_janken_preview_area = all_janken_preview_area + add_code;
     }
-    document.getElementById('janken-preview-area').innerHTML = all_janken_preview_area;
-};
+    return all_janken_preview_area;
+}
 
 function clickOfferer(pJankenId) {
 
@@ -61,10 +72,16 @@ function clickOfferer(pJankenId) {
 
     jankenPreviewArea.firstElementChild.remove();
 
-    if (jankenPreviewArea.childElementCount) {
-        console.log("next");
-    } else {
-        console.log("finished")
+    if (!jankenPreviewArea.childElementCount && total_janken_set > 0) {
+
+        total_janken_set--;
+        let all_janken_preview_area = generate_janken_one_set();
+
+        document.getElementById('janken-preview-area').innerHTML = all_janken_preview_area;
+
+        console.log("finished");
+    } else if (!jankenPreviewArea.childElementCount && total_janken_set == 0) {
+        alert("stage clear");
     }
 }
 
@@ -76,7 +93,6 @@ function isWin(players, coms) {
     } else if (players == 2 && coms == 0) {
         return true;
     }
-
     return false;
 }
 
@@ -84,7 +100,6 @@ function isDrow(players, coms) {
     if (players == coms) {
         return true;
     }
-
     return false;
 }
 
@@ -92,6 +107,5 @@ function isLose(players, coms) {
     if (!isWin(players, coms) && !isDrow(players, coms)) {
         return true;
     }
-
     return false;
 }
