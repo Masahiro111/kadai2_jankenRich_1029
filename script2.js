@@ -43,7 +43,7 @@ function generate_janken_one_set() {
         var add_code = `
         <div class="relative mx-auto" data-jankenID="${janken_id}">
             <img class="relative z-10 rounded-full shadow-sm border-4 border-${theme_color}-300 bg-${theme_color}-50 h-20 w-20" src="./images/case-${janken_id}.png" alt="">
-            <img class="absolute -top-10 -right-4 rounded-full shadow-sm h-20 w-20" src="./images/obake-${obake_id}.png" alt="">
+            <img class="absolute -top-10 -right-4 rounded-full shadow-sm h-23 w-20" src="./images/obake-${obake_id}.png" alt="">
         </div >
         `;
         all_janken_preview_area = all_janken_preview_area + add_code;
@@ -71,9 +71,30 @@ function clickOfferer(pJankenId) {
         console.log("lose");
     }
 
-    jankenPreviewArea.firstElementChild.remove();
+
+    $('#janken-preview-area > :first').animate({
+        opacity: 0.55,    // 透明度0.25へ
+        top: '-=1000',
+    }, 300, function () {
+        // アニメーション完了後に実行する処理
+        this.remove();
+    });
+
+
+    // // じゃんけんフィールドの最初の子要素を削除
+    // jankenPreviewArea.firstElementChild.animate([
+    //     // keyframes
+    //     { transform: 'translateY(0px)' },
+    //     { transform: 'translateY(-1500px)' }
+    // ], {
+    //     // timing options
+    //     duration: 300,
+    // });
+    // jankenPreviewArea.firstElementChild.remove();
+
 
     if (!jankenPreviewArea.childElementCount && total_janken_set > 0) {
+        // フィールドのじゃんけんがない 且つ じゃんけんセットが残っている場合
 
         total_janken_set--;
         let all_janken_preview_area = generate_janken_one_set();
@@ -81,7 +102,10 @@ function clickOfferer(pJankenId) {
         document.getElementById('janken-preview-area').innerHTML = all_janken_preview_area;
 
         console.log("finished");
+
     } else if (!jankenPreviewArea.childElementCount && total_janken_set == 0) {
+        // フィールドのじゃんけんがない 且つ じゃんけんセットが終了した場合
+
         alert("stage finished");
     }
 }
