@@ -8,22 +8,58 @@
           <title>Typing Game</title>
           <link rel="stylesheet" href="style.css" />
           <script src="https://cdn.tailwindcss.com"></script>
-
      </head>
 
      <body class="bg-gray-200 relative">
-
-
-          <!-- Title iew -->
-
-          <!-- Menu view -->
 
           <!-- Janken view -->
           <div
                class="container bg-center bg-no-repeat m-auto bg-cover w-96 overflow-hidden h-screen"
                style="background-image: url('images/1.jpg'); background-color:rgba(0,0,0,.3); background-blend-mode:color-burn;">
+
+
+               <!-- Title iew ----------------------------------------------------------- -->
+               <div
+                    id="title_view"
+                    class="w-96 h-screen m-auto fixed top-0 left-0 right-0 bottom-0 z-50 bg-cover flex flex-col justify-center items-center"
+                    style="background-image: url('images/title-back.jpg'); background-color:rgba(0,0,0,0); background-blend-mode:color-burn;">
+                    <div class="modal-body">
+                         <div class="modal-content flex flex-col justify-center items-center ">
+                              <div class="flex justify-center items-center mb-4">
+                                   <img
+                                        class="w-2/3"
+                                        src="./images/ff10.png"
+                                        alt="title logo">
+                              </div>
+                              <buitton id="to_menu" class="w-48 cursor-pointer shadow-2xl bg-gradient-to-tr from-blue-600 to-purple-600 hover:from-blue-800 hover:to-purple-800 active:from-indigo-700 active:to-purple-600 focus-visible:ring ring-indigo-800 text-white font-semibold text-center rounded-sm outline-none transition duration-100 px-5 py-4">
+                                   Game Start
+                              </buitton>
+                         </div>
+                    </div>
+               </div>
+
+
+               <!-- Menu view --------------------------------------------------------- -->
+               <div
+                    id="menu_view"
+                    class="w-96 h-screen m-auto fixed top-0 left-0 right-0 bottom-0 z-40 bg-cover flex flex-col justify-center items-center"
+                    style="background-image: url('images/menu-back.jpg'); background-color:rgba(0,0,0,0); background-blend-mode:color-burn;">
+                    <div class="modal-body">
+                         <div class="modal-content mb-8">
+                              <button id="to_janken" class="w-48 cursor-pointer shadow-2xl bg-gradient-to-tr from-blue-600 to-purple-600 hover:from-blue-800 hover:to-purple-800 text-white font-semibold text-center rounded-sm outline-none transition duration-100 px-5 py-4">Play Janken</button>
+                         </div>
+                         <div class="modal-content">
+                              <button id="to_title" class="w-48 cursor-pointer shadow-2xl bg-gradient-to-tr from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold text-center rounded-sm outline-none transition duration-100 px-5 py-4">Back to Top</button>
+                         </div>
+                    </div>
+               </div>
+
+
+               <!-- Main Janken view -------------------------------------------------- -->
+
                <div class=" timer" id="timer">aaaaaaaaaaaaaa</div>
                <div class="total-score text-white" id="total-score">0</div>
+               <button id="back_menu" class="text-white">to_menu</button>
 
                <!-- target button -->
                <div
@@ -36,7 +72,14 @@
                <div class="absolute h-40 bottom-6 right-0 left-0 flex justify-center gap-3 mb-6">
                     <div class="relative">
                          <img
-                              class="absolute -top-14 -right-14 hidden"
+                              id="attack-effect-gu-win"
+                              class="absolute -top-14 -right-14 z-10 hidden"
+                              src="./images/p1.png"
+                              alt="">
+                         <img
+                              id="attack-effect-gu-lose"
+                              class="absolute -top-14 -right-14 z-10 hidden"
+                              style="filter: grayscale(1);"
                               src="./images/p1.png"
                               alt="">
                          <img
@@ -45,7 +88,14 @@
                     </div>
                     <div class="self-end relative">
                          <img
-                              class="absolute -top-24 hidden"
+                              id="attack-effect-choki-win"
+                              class="absolute -top-24 z-10 hidden"
+                              src="./images/p1.png"
+                              alt="">
+                         <img
+                              id="attack-effect-choki-lose"
+                              class="absolute -top-24 z-10 hidden"
+                              style="filter: grayscale(1);"
                               src="./images/p1.png"
                               alt="">
                          <img
@@ -54,6 +104,7 @@
                     </div>
                     <div class="relative">
                          <img
+                              id="attack-effect"
                               class="absolute -top-14 right-14 hidden"
                               src="./images/p1.png"
                               alt="">

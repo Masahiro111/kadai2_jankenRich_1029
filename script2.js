@@ -24,6 +24,24 @@ window.onload = function () {
     document.getElementById('janken-preview-area').innerHTML = all_janken_preview_area;
 };
 
+
+$('#to_menu').on('click', function () {
+    $('#title_view').fadeOut();
+});
+
+$('#to_title').on('click', function () {
+    $('#title_view').fadeIn();
+});
+
+$('#to_janken').on('click', function () {
+    $('#menu_view').fadeOut();
+});
+
+$('#back_menu').on('click', function () {
+    $('#menu_view').fadeIn();
+});
+
+
 function generate_janken_one_set() {
     var all_janken_preview_area = "";
 
@@ -51,6 +69,15 @@ function generate_janken_one_set() {
     return all_janken_preview_area;
 }
 
+function showJankenAction(pJankenId, result) {
+    if (pJankenId == 0 && result == 'win') {
+        // alert(1);
+        $('#attack-effect-gu-win').fadeIn(150, function () {
+            $(this).fadeOut(150);
+        });
+    }
+}
+
 function clickOfferer(pJankenId) {
 
     let jankenPreviewArea = document.getElementById("janken-preview-area");
@@ -58,6 +85,9 @@ function clickOfferer(pJankenId) {
 
     if (isWin(pJankenId, targetJanken.dataset.jankenid)) {
         document.getElementById("total-score").innerHTML = total_score += 100;
+
+        showJankenAction(pJankenId, 'win');
+
         console.log("win");
     }
 
@@ -78,36 +108,18 @@ function clickOfferer(pJankenId) {
     }, 300, function () {
         // アニメーション完了後に実行する処理
         this.remove();
+
+        if (!jankenPreviewArea.childElementCount && total_janken_set > 0) {
+            // フィールドのじゃんけんがない 且つ じゃんけんセットが残っている場合
+            total_janken_set--;
+            let all_janken_preview_area = generate_janken_one_set();
+            document.getElementById('janken-preview-area').innerHTML = all_janken_preview_area;
+            console.log("finished");
+        } else if (!jankenPreviewArea.childElementCount && total_janken_set == 0) {
+            // フィールドのじゃんけんがない 且つ じゃんけんセットが終了した場合
+            alert("stage finished");
+        }
     });
-
-
-    // // じゃんけんフィールドの最初の子要素を削除
-    // jankenPreviewArea.firstElementChild.animate([
-    //     // keyframes
-    //     { transform: 'translateY(0px)' },
-    //     { transform: 'translateY(-1500px)' }
-    // ], {
-    //     // timing options
-    //     duration: 300,
-    // });
-    // jankenPreviewArea.firstElementChild.remove();
-
-
-    if (!jankenPreviewArea.childElementCount && total_janken_set > 0) {
-        // フィールドのじゃんけんがない 且つ じゃんけんセットが残っている場合
-
-        total_janken_set--;
-        let all_janken_preview_area = generate_janken_one_set();
-
-        document.getElementById('janken-preview-area').innerHTML = all_janken_preview_area;
-
-        console.log("finished");
-
-    } else if (!jankenPreviewArea.childElementCount && total_janken_set == 0) {
-        // フィールドのじゃんけんがない 且つ じゃんけんセットが終了した場合
-
-        alert("stage finished");
-    }
 }
 
 function isWin(players, coms) {
