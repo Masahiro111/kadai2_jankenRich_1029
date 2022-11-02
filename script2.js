@@ -25,6 +25,7 @@ window.onload = function () {
 };
 
 
+// シーンの遷移 -----------------------------------------------------------------------
 $('#to_menu').on('click', function () {
     $('#title_view').fadeOut();
 });
@@ -42,6 +43,7 @@ $('#back_menu').on('click', function () {
 });
 
 
+// じゃんけんの生成 ------------------------------------------------------------------
 function generate_janken_one_set() {
     var all_janken_preview_area = "";
 
@@ -69,15 +71,28 @@ function generate_janken_one_set() {
     return all_janken_preview_area;
 }
 
+// じゃんけんのアクションを表示 ----------------------------------------------------
 function showJankenAction(pJankenId, result) {
     if (pJankenId == 0 && result == 'win') {
-        // alert(1);
         $('#attack-effect-gu-win').fadeIn(150, function () {
+            $(this).fadeOut(150);
+        });
+    }
+
+    if (pJankenId == 1 && result == 'win') {
+        $('#attack-effect-choki-win').fadeIn(150, function () {
+            $(this).fadeOut(150);
+        });
+    }
+
+    if (pJankenId == 2 && result == 'win') {
+        $('#attack-effect-pa-win').fadeIn(150, function () {
             $(this).fadeOut(150);
         });
     }
 }
 
+// じゃんけんの判定 -----------------------------------------------------------------
 function clickOfferer(pJankenId) {
 
     let jankenPreviewArea = document.getElementById("janken-preview-area");
@@ -100,7 +115,6 @@ function clickOfferer(pJankenId) {
         document.getElementById("total-score").innerHTML = total_score -= 50;
         console.log("lose");
     }
-
 
     $('#janken-preview-area > :first').animate({
         opacity: 0.55,    // 透明度0.25へ
