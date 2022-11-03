@@ -13,11 +13,8 @@ const LOSE_REACTION = 3;
 
 let reaction_num = 0;
 
-// じゃんけんのセット回数
-let total_janken_set = 5;
-
 // タイマー
-let timer_set = 30;
+let timer_set = 6;
 let timer;
 var stopflg = false;
 
@@ -36,24 +33,23 @@ music_battle.loop = true;
 music_battle.volume = ser_volume;
 
 
-// ページ読み込み後の初期化処理
-window.onload = function () {
-
-    let all_janken_preview_area = generate_janken_one_set();
-
-    document.getElementById('janken-preview-area').innerHTML = all_janken_preview_area;
-};
-
-
 // シーンの遷移 -----------------------------------------------------------------------
-$('#to_title').on('click', function () {
+// タイトルへもどる
+$('.to_title').on('click', function () {
     $('#title_view').fadeIn();
+
+    $('#result_view').css('display', 'none');
+
+    document.getElementById('janken-preview-area').innerHTML = "";
+
+    clearInterval(timer);
 });
 
+// メインシーンへ移動
 $('#to_janken').on('click', function () {
-    $('#title_view').fadeOut();
-
-    timer = setInterval(countdwn, 1000);
+    $('#title_view').fadeOut(function () {
+        gameInit();
+    });
 });
 
 
@@ -61,11 +57,35 @@ $('#to_janken').on('click', function () {
 function countdwn() {
     timer_set -= 1;
     document.getElementById('timer').innerHTML = timer_set;
-    if (timer_set <= 0) {
+    if (timer_set < 1) {
         clearInterval(timer);
+        showResult();
     }
 }
 
+// ゲームの初期設定 ------------------------------------------------------------------
+function gameInit() {
+    timer_set = 6;
+    total_score = 0;
+    timer = setInterval(countdwn, 1000);
+
+    $('#total-score').text(total_score);
+
+    show_janken_on_preview_area();
+}
+
+// リザルト画面の表示 ----------------------------------------------------------------
+function showResult() {
+    $('#result_view').fadeIn(300, function () {
+        $('#score_result').text(total_score);
+    });
+}
+
+// じゃんけんを生成してエリアに表示 ------------------------------------------------
+function show_janken_on_preview_area() {
+    var all_janken_preview_area = generate_janken_one_set();
+    document.getElementById('janken-preview-area').innerHTML = all_janken_preview_area;
+}
 
 // じゃんけんの生成 ------------------------------------------------------------------
 function generate_janken_one_set() {
@@ -152,13 +172,13 @@ function clickOfferer(pJankenId) {
     if (isDrow(pJankenId, targetJanken.dataset.jankenid)) {
         showJankenMissAction(pJankenId);
 
-        resultView();
+        showResult();
     }
 
     if (isLose(pJankenId, targetJanken.dataset.jankenid)) {
         showJankenMissAction(pJankenId);
 
-        resultView();
+        showResult();
     }
 
     $('#janken-preview-area > :first').animate({
@@ -168,22 +188,16 @@ function clickOfferer(pJankenId) {
         // アニメーション完了後に実行する処理
         this.remove();
 
-        if (!jankenPreviewArea.childElementCount && total_janken_set > 0) {
-            // フィールドのじゃんけんがない 且つ じゃんけんセットが残っている場合
-            total_janken_set--;
-            let all_janken_preview_area = generate_janken_one_set();
-            document.getElementById('janken-preview-area').innerHTML = all_janken_preview_area;
+        if (!jankenPreviewArea.childElementCount) {
+            // フィールドのじゃんけんがない場合
+            // 新規にじゃんけんを表示
+            show_janken_on_preview_area();
+
             console.log("finished");
-        } else if (!jankenPreviewArea.childElementCount && total_janken_set == 0) {
-            // フィールドのじゃんけんがない 且つ じゃんけんセットが終了した場合
-            alert("stage finished");
         }
     });
 }
 
-function resultView() {
-    // alert('result');
-}
 
 function isWin(players, coms) {
     if (players == 0 && coms == 1) {

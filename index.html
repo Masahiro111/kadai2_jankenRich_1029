@@ -17,7 +17,7 @@
           <meta property="og:site_name" content="JANKEN FANTASY 10">
           <meta property="og:description" content="サムネだけ見れば「RPG」感！実際は、じゃんけんゲームです～。">
 
-          <title>Typing Game</title>
+          <title>Janken Fantasy 10 ～世界一ピュアな じゃんけん～</title>
           <script src="https://cdn.tailwindcss.com"></script>
      </head>
 
@@ -51,10 +51,39 @@
                     </div>
                </div>
 
+
+               <!-- Result view ----------------------------------------------------------- -->
+               <div
+                    class="hidden"
+                    id="result_view">
+                    <div
+                         class="w-96 h-screen m-auto fixed top-0 left-0 right-0 bottom-0 z-40 bg-cover flex flex-col justify-center items-center"
+                         style="background-color:rgba(0, 0, 0, 0.2);">
+                         <div
+                              class="modal-body w-5/6 h-5/6 rounded-md"
+                              style="background-color:rgba(255, 255, 255, 0.85);">
+
+                              <div class="modal-content flex flex-col justify-center items-center">
+
+                                   <p class="text-gray-600 font-bold text-center p-4 mt-36">あなたのスコア</p>
+                                   <p
+                                      class="text-7xl font-bold text-gray-600 mb-10"
+                                      id="score_result">0</p>
+
+                                   <buitton
+                                            class="to_title w-48 cursor-pointer shadow-2xl bg-gradient-to-tr from-blue-600 to-purple-600 hover:from-blue-800 hover:to-purple-800 active:from-indigo-700 active:to-purple-600 focus-visible:ring ring-indigo-800 text-white font-semibold text-center rounded-sm outline-none transition duration-100 px-5 py-4">
+                                        タイトルへ戻る
+                                   </buitton>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+
                <!-- Main Janken view -------------------------------------------------- -->
 
                <div class="modal-content mb-8">
-                    <button id="to_title" class="cursor-pointer shadow-2xl bg-gradient-to-tr from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold text-center rounded-sm outline-none transition duration-100 px-4 py-2 opacity-70">&lt;&nbsp;back</button>
+                    <button
+                            class="to_title cursor-pointer shadow-2xl bg-gradient-to-tr from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold text-center rounded-sm outline-none transition duration-100 px-4 py-2 opacity-70">&lt;&nbsp;back</button>
                </div>
 
                <div
@@ -64,7 +93,7 @@
                          <p class="total-score text-white text-xl">Time</p>
                          <p
                             class="total-score text-white text-5xl"
-                            id="timer">0
+                            id="timer">5
                          </p>
                     </div>
                     <div>
@@ -109,6 +138,12 @@
                               src="./images/p1.png"
                               alt="">
                          <img
+                              id="attack-miss-effect-choki"
+                              class="absolute -top-24 z-10 hidden"
+                              style="filter: grayscale(1);"
+                              src="./images/p1.png"
+                              alt="">
+                         <img
                               onclick="clickOfferer(1);"
                               class="inline-block cursor-pointer shadow-lg bg-pink-500 hover:bg-pink-800 h-24 w-24 rounded-full" src="./images/case-w-1.png" alt="">
                     </div>
@@ -116,6 +151,12 @@
                          <img
                               id="attack-effect-pa-win"
                               class="absolute -top-14 right-14 hidden"
+                              src="./images/p1.png"
+                              alt="">
+                         <img
+                              id="attack-miss-effect-pa"
+                              class="absolute -top-14 right-14 hidden"
+                              style="filter: grayscale(1);"
                               src="./images/p1.png"
                               alt="">
                          <img
