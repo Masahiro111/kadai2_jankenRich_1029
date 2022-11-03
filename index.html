@@ -2,9 +2,21 @@
 <html lang="en">
 
      <head>
+          <meta name="twitter:card" content="summary_large_image" />
+
           <meta charset="UTF-8" />
           <meta http-equiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+          <meta property="og:title" content="JANKEN FANTASY 10 | 2 回目 課題">
+          <meta property="og:type" content="website">
+          <meta property="og:url" content="https://masahiro111.github.io/kadai2_jankenRich_1029/">
+          <meta property="og:image" content="https://masahiro111.github.io/kadai2_jankenRich_1029/images/ff-logo.jpg">
+          <meta property="og:image:width" content="1200">
+          <meta property="og:image:height" content="630">
+          <meta property="og:site_name" content="チーズアカデミー ジェネレータ―">
+          <meta property="og:description" content="「G's の伝統」チーズアカデミーをドラッグ＆ドロップで 10 秒作成！">
+
           <title>Typing Game</title>
           <link rel="stylesheet" href="style.css" />
           <script src="https://cdn.tailwindcss.com"></script>
@@ -21,7 +33,7 @@
 
 
                <!-- Title iew ----------------------------------------------------------- -->
-               <div
+               <!-- <div
                     id="title_view"
                     class="w-96 h-screen m-auto fixed top-0 left-0 right-0 bottom-0 z-50 bg-cover flex flex-col justify-center items-center"
                     style="background-image: url('images/title-back.jpg'); background-color:rgba(0,0,0,0); background-blend-mode:color-burn;">
@@ -37,7 +49,7 @@
                                    Game Start
                               </buitton>
 
-                              <!-- <div>
+                              <div>
                                    <button id="play" class="btn btn-primary">再生</button>
                               </div>
 
@@ -45,15 +57,15 @@
                                    <button id="volume-up" class="btn btn-success"><i class="fas fa-caret-up"></i></button>
                                    <button id="volume-down" class="btn btn-success"><i class="fas fa-caret-down"></i></button>
                                    <button id="mute" class="btn btn-warning"><i class="fas fa-volume-mute"></i></button>
-                              </div> -->
+                              </div>
 
                          </div>
                     </div>
-               </div>
+               </div> -->
 
 
                <!-- Menu view --------------------------------------------------------- -->
-               <div
+               <!-- <div
                     id="menu_view"
                     class="w-96 h-screen m-auto fixed top-0 left-0 right-0 bottom-0 z-40 bg-cover flex flex-col justify-center items-center"
                     style="background-image: url('images/menu-back.jpg'); background-color:rgba(0,0,0,0); background-blend-mode:color-burn;">
@@ -65,7 +77,7 @@
                               <button id="to_title" class="w-48 cursor-pointer shadow-2xl bg-gradient-to-tr from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold text-center rounded-sm outline-none transition duration-100 px-5 py-4">Back to Top</button>
                          </div>
                     </div>
-               </div>
+               </div> -->
 
 
                <!-- Main Janken view -------------------------------------------------- -->
@@ -74,8 +86,20 @@
                     <button id="back_menu" class="cursor-pointer shadow-2xl bg-gradient-to-tr from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold text-center rounded-sm outline-none transition duration-100 px-4 py-2 opacity-70">&lt;&nbsp;back</button>
                </div>
 
-               <div class=" timer" id="timer">0</div>
-               <div class="total-score text-white" id="total-score">0</div>
+               <div
+                    class="text-white pl-8 font-bold w-28 flex justify-between"
+                    id="status-box">
+                    <p
+                       class="timer"
+                       id="timer">0
+                    </p>
+                    <p class="total-score text-white text-xl">Score</p>
+                    <p
+                       class="total-score text-white text-4xl"
+                       id="total-score">0
+                    </p>
+               </div>
+
 
                <!-- target button -->
                <div

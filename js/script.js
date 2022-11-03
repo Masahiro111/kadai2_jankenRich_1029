@@ -128,7 +128,7 @@ function generate_janken_one_set() {
         var obake_id = Math.floor(Math.random() * 2);
         var add_code = `
         <div class="relative mx-auto" data-jankenID="${janken_id}">
-            <img class="relative z-10 rounded-full shadow-sm border-4 border-${theme_color}-300 bg-${theme_color}-50 h-20 w-20" src="./images/case-${janken_id}.png" alt="">
+            <img class="relative z-10 rounded-full shadow-sm border-4 border-${theme_color}-500 bg-${theme_color}-50 h-20 w-20" src="./images/case-${janken_id}.png" alt="">
             <img class="absolute -top-10 -right-4 rounded-full shadow-sm h-23 w-20" src="./images/obake-${obake_id}.png" alt="">
         </div >
         `;
