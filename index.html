@@ -82,9 +82,12 @@
                <!-- Main Janken view -------------------------------------------------- -->
 
                <div class="modal-content mb-8">
-                    <button
-                            class="to_title cursor-pointer shadow-2xl bg-gradient-to-tr from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold text-center rounded-sm outline-none transition duration-100 px-4 py-2 opacity-70">&lt;&nbsp;back</button>
+                    <button class="to_title cursor-pointer shadow-2xl bg-gradient-to-tr from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold text-center rounded-sm outline-none transition duration-100 px-4 py-2 opacity-70">&lt;&nbsp;back</button>
                </div>
+
+               <div
+                    class="absolute top-1/2 left-0 right-0 z-30 w-48 ml-auto mr-auto text-white text-4xl font-bold bg-blue-500 -mt-12 p-4 hidden"
+                    id="time-flag">Time Up !</div>
 
                <div
                     class="text-white ml-8 mr-8 mx-auto font-bold flex justify-between"
@@ -93,7 +96,7 @@
                          <p class="total-score text-white text-xl">Time</p>
                          <p
                             class="total-score text-white text-5xl"
-                            id="timer">5
+                            id="timer">30
                          </p>
                     </div>
                     <div>
@@ -104,7 +107,6 @@
                          </p>
                     </div>
                </div>
-
 
                <!-- target button -->
                <div

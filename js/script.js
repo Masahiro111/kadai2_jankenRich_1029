@@ -14,7 +14,8 @@ const LOSE_REACTION = 3;
 let reaction_num = 0;
 
 // タイマー
-let timer_set = 6;
+const time_init = 31;
+let timer_set = time_init;
 let timer;
 var stopflg = false;
 
@@ -22,9 +23,9 @@ var stopflg = false;
 const music_op = new Audio('./audio/op1.mp3');
 const music_battle = new Audio('./audio/battle1.mp3');
 
-let ser_volume = 0.2;
+let ser_volume = 0;
 
-music_op.pause();
+music_op.play();
 music_op.loop = true;
 music_op.volume = ser_volume;
 
@@ -34,19 +35,25 @@ music_battle.volume = ser_volume;
 
 
 // シーンの遷移 -----------------------------------------------------------------------
+
 // タイトルへもどる
 $('.to_title').on('click', function () {
-    $('#title_view').fadeIn();
+    music_op.play();
+    music_battle.pause();
 
+    $('#title_view').fadeIn();
     $('#result_view').css('display', 'none');
+    $('#time-flag').css('display', 'none');
 
     document.getElementById('janken-preview-area').innerHTML = "";
-
     clearInterval(timer);
 });
 
 // メインシーンへ移動
 $('#to_janken').on('click', function () {
+    music_op.pause();
+    music_battle.play();
+
     $('#title_view').fadeOut(function () {
         gameInit();
     });
@@ -59,15 +66,18 @@ function countdwn() {
     document.getElementById('timer').innerHTML = timer_set;
     if (timer_set < 1) {
         clearInterval(timer);
-        showResult();
+
+        $('#time-flag').fadeIn();
+        showResult(1);
     }
 }
 
 // ゲームの初期設定 ------------------------------------------------------------------
 function gameInit() {
-    timer_set = 6;
-    total_score = 0;
+    timer_set = time_init;
     timer = setInterval(countdwn, 1000);
+
+    total_score = 0;
 
     $('#total-score').text(total_score);
 
@@ -75,9 +85,11 @@ function gameInit() {
 }
 
 // リザルト画面の表示 ----------------------------------------------------------------
-function showResult() {
-    $('#result_view').fadeIn(300, function () {
+function showResult(time_flag) {
+    $('#result_view').delay(2000).fadeIn(300, function () {
         $('#score_result').text(total_score);
+        clearInterval(timer);
+        $('#timer').text(30);
     });
 }
 
@@ -140,19 +152,19 @@ function showJankenAction(pJankenId) {
 function showJankenMissAction(pJankenId) {
     if (pJankenId == 0) {
         $('#attack-miss-effect-gu').fadeIn(150, function () {
-            $(this).fadeOut(150);
+            $(this)().delay(3000).fadeOut(150);
         });
     }
 
     if (pJankenId == 1) {
         $('#attack-miss-effect-choki').fadeIn(150, function () {
-            $(this).fadeOut(150);
+            $(this).delay(3000).fadeOut(150);
         });
     }
 
     if (pJankenId == 2) {
         $('#attack-miss-effect-pa').fadeIn(150, function () {
-            $(this).fadeOut(150);
+            $(this).delay(3000).fadeOut(150);
         });
     }
 }
