@@ -46,28 +46,14 @@ window.onload = function () {
 
 
 // シーンの遷移 -----------------------------------------------------------------------
-$('#to_menu').on('click', function () {
-    $('#title_view').fadeOut();
-});
-
 $('#to_title').on('click', function () {
     $('#title_view').fadeIn();
 });
 
 $('#to_janken').on('click', function () {
-    $('#menu_view').fadeOut();
-
-    // music_op.pause();
-    // music_battle.play();
+    $('#title_view').fadeOut();
 
     timer = setInterval(countdwn, 1000);
-});
-
-$('#back_menu').on('click', function () {
-    $('#menu_view').fadeIn();
-
-    // music_op.play();
-    // music_battle.pause();
 });
 
 
@@ -75,38 +61,10 @@ $('#back_menu').on('click', function () {
 function countdwn() {
     timer_set -= 1;
     document.getElementById('timer').innerHTML = timer_set;
-    if (timer_set < 0) {
+    if (timer_set <= 0) {
         clearInterval(timer);
     }
 }
-
-
-// 音量設定 ---------------------------------------------------------------------------
-// 音量ボタン
-volumeUp.addEventListener('click', function () {
-    const volume = music.volume;
-    if (volume < 1) {
-        music.volume = (volume * 10 + 1) / 10;
-    }
-});
-
-volumeDown.addEventListener('click', function () {
-    const volume = music.volume;
-    if (volume > 0) {
-        music.volume = (volume * 10 - 1) / 10;
-    }
-});
-
-// ミュートボタン
-mute.addEventListener('click', function () {
-    if (music.muted) {
-        music.muted = false;
-        mute.innerHTML = '<i class="fas fa-volume-mute">';
-    } else {
-        music.muted = true;
-        mute.innerHTML = '<i class="fas fa-volume-up"></i>';
-    }
-});
 
 
 // じゃんけんの生成 ------------------------------------------------------------------
