@@ -57,8 +57,8 @@ $('#to_title').on('click', function () {
 $('#to_janken').on('click', function () {
     $('#menu_view').fadeOut();
 
-    music_op.pause();
-    music_battle.play();
+    // music_op.pause();
+    // music_battle.play();
 
     timer = setInterval(countdwn, 1000);
 });
@@ -66,8 +66,8 @@ $('#to_janken').on('click', function () {
 $('#back_menu').on('click', function () {
     $('#menu_view').fadeIn();
 
-    music_op.play();
-    music_battle.pause();
+    // music_op.play();
+    // music_battle.pause();
 });
 
 
