@@ -16,6 +16,26 @@ let reaction_num = 0;
 // じゃんけんのセット回数
 let total_janken_set = 5;
 
+// タイマー
+let timer_set = 30;
+let timer;
+var stopflg = false;
+
+// bgm
+const music_op = new Audio('./audio/op1.mp3');
+const music_battle = new Audio('./audio/battle1.mp3');
+
+let ser_volume = 0.2;
+
+music_op.pause();
+music_op.loop = true;
+music_op.volume = ser_volume;
+
+music_battle.pause();
+music_battle.loop = true;
+music_battle.volume = ser_volume;
+
+
 // ページ読み込み後の初期化処理
 window.onload = function () {
 
@@ -36,10 +56,56 @@ $('#to_title').on('click', function () {
 
 $('#to_janken').on('click', function () {
     $('#menu_view').fadeOut();
+
+    music_op.pause();
+    music_battle.play();
+
+    timer = setInterval(countdwn, 1000);
 });
 
 $('#back_menu').on('click', function () {
     $('#menu_view').fadeIn();
+
+    music_op.play();
+    music_battle.pause();
+});
+
+
+// タイマーの設定 ---------------------------------------------------------------------
+function countdwn() {
+    timer_set -= 1;
+    document.getElementById('timer').innerHTML = timer_set;
+    if (timer_set < 0) {
+        clearInterval(timer);
+    }
+}
+
+
+// 音量設定 ---------------------------------------------------------------------------
+// 音量ボタン
+volumeUp.addEventListener('click', function () {
+    const volume = music.volume;
+    if (volume < 1) {
+        music.volume = (volume * 10 + 1) / 10;
+    }
+});
+
+volumeDown.addEventListener('click', function () {
+    const volume = music.volume;
+    if (volume > 0) {
+        music.volume = (volume * 10 - 1) / 10;
+    }
+});
+
+// ミュートボタン
+mute.addEventListener('click', function () {
+    if (music.muted) {
+        music.muted = false;
+        mute.innerHTML = '<i class="fas fa-volume-mute">';
+    } else {
+        music.muted = true;
+        mute.innerHTML = '<i class="fas fa-volume-up"></i>';
+    }
 });
 
 
@@ -71,22 +137,43 @@ function generate_janken_one_set() {
     return all_janken_preview_area;
 }
 
-// じゃんけんのアクションを表示 ----------------------------------------------------
-function showJankenAction(pJankenId, result) {
-    if (pJankenId == 0 && result == 'win') {
+// じゃんけんの正解アクションを表示 ----------------------------------------------------
+function showJankenAction(pJankenId) {
+    if (pJankenId == 0) {
         $('#attack-effect-gu-win').fadeIn(150, function () {
             $(this).fadeOut(150);
         });
     }
 
-    if (pJankenId == 1 && result == 'win') {
+    if (pJankenId == 1) {
         $('#attack-effect-choki-win').fadeIn(150, function () {
             $(this).fadeOut(150);
         });
     }
 
-    if (pJankenId == 2 && result == 'win') {
+    if (pJankenId == 2) {
         $('#attack-effect-pa-win').fadeIn(150, function () {
+            $(this).fadeOut(150);
+        });
+    }
+}
+
+// じゃんけんのミスアクションを表示 ----------------------------------------------------
+function showJankenMissAction(pJankenId) {
+    if (pJankenId == 0) {
+        $('#attack-miss-effect-gu').fadeIn(150, function () {
+            $(this).fadeOut(150);
+        });
+    }
+
+    if (pJankenId == 1) {
+        $('#attack-miss-effect-choki').fadeIn(150, function () {
+            $(this).fadeOut(150);
+        });
+    }
+
+    if (pJankenId == 2) {
+        $('#attack-miss-effect-pa').fadeIn(150, function () {
             $(this).fadeOut(150);
         });
     }
@@ -101,25 +188,25 @@ function clickOfferer(pJankenId) {
     if (isWin(pJankenId, targetJanken.dataset.jankenid)) {
         document.getElementById("total-score").innerHTML = total_score += 100;
 
-        showJankenAction(pJankenId, 'win');
-
-        console.log("win");
+        showJankenAction(pJankenId);
     }
 
     if (isDrow(pJankenId, targetJanken.dataset.jankenid)) {
-        document.getElementById("total-score").innerHTML = total_score += 0;
-        console.log("drow");
+        showJankenMissAction(pJankenId);
+
+        resultView();
     }
 
     if (isLose(pJankenId, targetJanken.dataset.jankenid)) {
-        document.getElementById("total-score").innerHTML = total_score -= 50;
-        console.log("lose");
+        showJankenMissAction(pJankenId);
+
+        resultView();
     }
 
     $('#janken-preview-area > :first').animate({
         opacity: 0.55,    // 透明度0.25へ
         top: '-=1000',
-    }, 300, function () {
+    }, 150, function () {
         // アニメーション完了後に実行する処理
         this.remove();
 
@@ -134,6 +221,10 @@ function clickOfferer(pJankenId) {
             alert("stage finished");
         }
     });
+}
+
+function resultView() {
+    // alert('result');
 }
 
 function isWin(players, coms) {

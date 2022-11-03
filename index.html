@@ -12,6 +12,8 @@
 
      <body class="bg-gray-200 relative">
 
+          <!-- <audio type="audio/mpeg" src="./audio/op1.mp3" controls></audio> -->
+
           <!-- Janken view -->
           <div
                class="container bg-center bg-no-repeat m-auto bg-cover w-96 overflow-hidden h-screen"
@@ -19,7 +21,7 @@
 
 
                <!-- Title iew ----------------------------------------------------------- -->
-               <!-- <div
+               <div
                     id="title_view"
                     class="w-96 h-screen m-auto fixed top-0 left-0 right-0 bottom-0 z-50 bg-cover flex flex-col justify-center items-center"
                     style="background-image: url('images/title-back.jpg'); background-color:rgba(0,0,0,0); background-blend-mode:color-burn;">
@@ -34,13 +36,26 @@
                               <buitton id="to_menu" class="w-48 cursor-pointer shadow-2xl bg-gradient-to-tr from-blue-600 to-purple-600 hover:from-blue-800 hover:to-purple-800 active:from-indigo-700 active:to-purple-600 focus-visible:ring ring-indigo-800 text-white font-semibold text-center rounded-sm outline-none transition duration-100 px-5 py-4">
                                    Game Start
                               </buitton>
+
+                              <div>
+                                   <!-- 再生ボタン -->
+                                   <button id="play" class="btn btn-primary">再生</button><!-- #play -->
+                              </div>
+                              <div>
+                                   <!-- 音量ボタン -->
+                                   <button id="volume-up" class="btn btn-success"><i class="fas fa-caret-up"></i></button><!-- #volume-up -->
+                                   <button id="volume-down" class="btn btn-success"><i class="fas fa-caret-down"></i></button><!-- #volume-down -->
+                                   <!-- ミュートボタン -->
+                                   <button id="mute" class="btn btn-warning"><i class="fas fa-volume-mute"></i></button><!-- .btn btn-warning -->
+                              </div>
+
                          </div>
                     </div>
-               </div> -->
+               </div>
 
 
                <!-- Menu view --------------------------------------------------------- -->
-               <!-- <div
+               <div
                     id="menu_view"
                     class="w-96 h-screen m-auto fixed top-0 left-0 right-0 bottom-0 z-40 bg-cover flex flex-col justify-center items-center"
                     style="background-image: url('images/menu-back.jpg'); background-color:rgba(0,0,0,0); background-blend-mode:color-burn;">
@@ -52,14 +67,17 @@
                               <button id="to_title" class="w-48 cursor-pointer shadow-2xl bg-gradient-to-tr from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold text-center rounded-sm outline-none transition duration-100 px-5 py-4">Back to Top</button>
                          </div>
                     </div>
-               </div> -->
+               </div>
 
 
                <!-- Main Janken view -------------------------------------------------- -->
 
-               <div class=" timer" id="timer">aaaaaaaaaaaaaa</div>
+               <div class="modal-content mb-8">
+                    <button id="back_menu" class="cursor-pointer shadow-2xl bg-gradient-to-tr from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold text-center rounded-sm outline-none transition duration-100 px-4 py-2 opacity-70">&lt;&nbsp;back</button>
+               </div>
+
+               <div class=" timer" id="timer">0</div>
                <div class="total-score text-white" id="total-score">0</div>
-               <button id="back_menu" class="text-white">to_menu</button>
 
                <!-- target button -->
                <div
@@ -77,8 +95,14 @@
                               src="./images/p1.png"
                               alt="">
                          <img
+                              id="attack-miss-effect-gu"
+                              class="absolute -top-14 -right-14 z-10 hidden"
+                              style="filter: grayscale(1);"
+                              src="./images/p1.png"
+                              alt="">
+                         <img
                               onclick="clickOfferer(0);"
-                              class="inline-block cursor-pointer shadow-lg hover:border-blue-500 bg-blue-400 hover:bg-blue-800 h-24 w-24 rounded-full" src="./images/case-0.png" alt="">
+                              class="inline-block cursor-pointer shadow-lg bg-blue-500 hover:bg-blue-800 h-24 w-24 rounded-full" src="./images/case-w-0.png" alt="">
                     </div>
                     <div class="self-end relative">
                          <img
@@ -88,7 +112,7 @@
                               alt="">
                          <img
                               onclick="clickOfferer(1);"
-                              class="inline-block cursor-pointer border-4 border-pink-300 hover:border-pink-400 bg-pink-50 hover:bg-pink-100 h-24 w-24 rounded-full" src="./images/case-1.png" alt="">
+                              class="inline-block cursor-pointer shadow-lg bg-pink-500 hover:bg-pink-800 h-24 w-24 rounded-full" src="./images/case-w-1.png" alt="">
                     </div>
                     <div class="relative">
                          <img
@@ -98,7 +122,7 @@
                               alt="">
                          <img
                               onclick="clickOfferer(2);"
-                              class="inline-block cursor-pointer border-4 border-yellow-300 hover:border-yellow-400 bg-yellow-50 hover:bg-yellow-100 h-24 w-24 rounded-full" src="./images/case-2.png" alt="">
+                              class="inline-block cursor-pointer shadow-lg bg-yellow-500 hover:bg-yellow-800 h-24 w-24 rounded-full" src="./images/case-w-2.png" alt="">
                     </div>
                </div>
           </div>
