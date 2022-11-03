@@ -17,13 +17,13 @@ let reaction_num = 0;
 const time_init = 31;
 let timer_set = time_init;
 let timer;
-var stopflg = false;
+let stop_flg = false;
 
 // bgm
 const music_op = new Audio('./audio/op1.mp3');
 const music_battle = new Audio('./audio/battle1.mp3');
 
-let ser_volume = 0;
+let ser_volume = 0.1;
 
 music_op.play();
 music_op.loop = true;
@@ -44,6 +44,7 @@ $('.to_title').on('click', function () {
     $('#title_view').fadeIn();
     $('#result_view').css('display', 'none');
     $('#time-flag').css('display', 'none');
+    $('#timer').text(30);
 
     document.getElementById('janken-preview-area').innerHTML = "";
     clearInterval(timer);
@@ -179,6 +180,22 @@ function clickOfferer(pJankenId) {
         document.getElementById("total-score").innerHTML = total_score += 100;
 
         showJankenAction(pJankenId);
+
+        $('#janken-preview-area > :first').animate({
+            opacity: 0.55,    // 透明度0.25へ
+            top: '-=1000',
+        }, 150, function () {
+            // アニメーション完了後に実行する処理
+            this.remove();
+
+            if (!jankenPreviewArea.childElementCount) {
+                // フィールドのじゃんけんがない場合
+                // 新規にじゃんけんを表示
+                show_janken_on_preview_area();
+
+                console.log("finished");
+            }
+        });
     }
 
     if (isDrow(pJankenId, targetJanken.dataset.jankenid)) {
@@ -192,22 +209,6 @@ function clickOfferer(pJankenId) {
 
         showResult();
     }
-
-    $('#janken-preview-area > :first').animate({
-        opacity: 0.55,    // 透明度0.25へ
-        top: '-=1000',
-    }, 150, function () {
-        // アニメーション完了後に実行する処理
-        this.remove();
-
-        if (!jankenPreviewArea.childElementCount) {
-            // フィールドのじゃんけんがない場合
-            // 新規にじゃんけんを表示
-            show_janken_on_preview_area();
-
-            console.log("finished");
-        }
-    });
 }
 
 
