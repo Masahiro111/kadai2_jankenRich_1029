@@ -153,7 +153,7 @@ function showJankenAction(pJankenId) {
 function showJankenMissAction(pJankenId) {
     if (pJankenId == 0) {
         $('#attack-miss-effect-gu').fadeIn(150, function () {
-            $(this)().delay(3000).fadeOut(150);
+            $(this).delay(3000).fadeOut(150);
         });
     }
 
