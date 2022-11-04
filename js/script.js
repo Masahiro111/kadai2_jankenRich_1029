@@ -25,6 +25,9 @@ const music_battle = new Audio('./audio/battle1.mp3');
 
 let ser_volume = 0.1;
 
+// じゃんけんボタンの使用可
+let can_janken_btn = 0;
+
 music_op.play();
 music_op.loop = true;
 music_op.volume = ser_volume;
@@ -79,6 +82,7 @@ function gameInit() {
     timer = setInterval(countdwn, 1000);
 
     total_score = 0;
+    can_janken_btn = 1;
 
     $('#total-score').text(total_score);
 
@@ -88,9 +92,36 @@ function gameInit() {
 // リザルト画面の表示 ----------------------------------------------------------------
 function showResult(time_flag) {
     $('#result_view').delay(2000).fadeIn(300, function () {
+
+        let result_comment = "";
+        let kunsyou_id = "";
+        if (total_score > 6000) {
+            result_comment = "すごすんぎ！";
+            kunsyou_id = 1;
+        } else if (total_score > 5000) {
+            result_comment = "プロですね！";
+            kunsyou_id = 2;
+        } else if (total_score > 4000) {
+            result_comment = "なかなかの腕前！";
+            kunsyou_id = 3;
+        } else if (total_score > 3000) {
+            result_comment = "練習すれば上達するよ！";
+            kunsyou_id = 4;
+        } else if (total_score > 2000) {
+            result_comment = "もっと頑張ろう！";
+            kunsyou_id = 5;
+        } else {
+            result_comment = "まだまだだね！";
+            kunsyou_id = 6;
+        }
+
         $('#score_result').text(total_score);
-        clearInterval(timer);
+
+        document.getElementById('kunsyou').innerHTML = '<img class="w-16" src="images/kunsyou-' + kunsyou_id + '.png" alt="">';
+        document.getElementById('result_comment').innerHTML = result_comment;
         $('#timer').text(30);
+
+        clearInterval(timer);
     });
 }
 
@@ -120,7 +151,7 @@ function generate_janken_one_set() {
         var add_code = `
         <div class="relative mx-auto" data-jankenID="${janken_id}">
             <img class="relative z-10 rounded-full shadow-sm border-4 border-${theme_color}-500 bg-${theme_color}-50 h-20 w-20" src="./images/case-${janken_id}.png" alt="">
-            <img class="absolute -top-10 -right-4 rounded-full shadow-sm h-23 w-20" src="./images/obake-${obake_id}.png" alt="">
+            <img class="absolute -top-11 -right-4 rounded-full shadow-sm w-24" src="./images/obake-${obake_id}.png" alt="">
         </div >
         `;
         all_janken_preview_area = all_janken_preview_area + add_code;
@@ -170,11 +201,16 @@ function showJankenMissAction(pJankenId) {
     }
 }
 
+
 // じゃんけんの判定 -----------------------------------------------------------------
 function clickOfferer(pJankenId) {
 
     let jankenPreviewArea = document.getElementById("janken-preview-area");
     let targetJanken = jankenPreviewArea.firstElementChild;
+
+    if (timer_set < 1 || can_janken_btn == 0) {
+        return 0;
+    }
 
     if (isWin(pJankenId, targetJanken.dataset.jankenid)) {
         document.getElementById("total-score").innerHTML = total_score += 100;
@@ -199,12 +235,16 @@ function clickOfferer(pJankenId) {
     }
 
     if (isDrow(pJankenId, targetJanken.dataset.jankenid)) {
+        can_janken_btn = 0;
+
         showJankenMissAction(pJankenId);
 
         showResult();
     }
 
     if (isLose(pJankenId, targetJanken.dataset.jankenid)) {
+        can_janken_btn = 0;
+
         showJankenMissAction(pJankenId);
 
         showResult();
