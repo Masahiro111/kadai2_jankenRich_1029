@@ -19,6 +19,17 @@
 
           <title>Janken Fantasy 10 ～世界一ピュアな じゃんけん～</title>
           <script src="https://cdn.tailwindcss.com"></script>
+          <style>
+               /* support iOS */
+               html {
+                    height: -webkit-fill-available;
+               }
+
+               body {
+                    min-height: 100vh;
+                    min-height: -webkit-fill-available;
+               }
+          </style>
      </head>
 
      <body class="bg-gray-200 relative">
